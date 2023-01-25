@@ -1,6 +1,5 @@
 #!/bin/sh
 unicode="" # edit this to whatever you like
-
 echo " ┌────────────┐
  │  \033[1;31;48m\033[1;37;0m user    │ \033[1;31;48m$(whoami)\033[1;37;0m 
  │  \033[1;33;48m\033[1;37;0m hname   │ \033[1;33;48m$(hostname)\033[1;37;0m 
