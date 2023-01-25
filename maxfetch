@@ -1,12 +1,15 @@
 #!/bin/sh
 unicode="" # edit this to whatever you like
-echo "
-   \033[1;31;48m user\033[1;37;0m    $(whoami)
-   \033[1;33;48m hname\033[1;37;0m   $(hostname)
-   \033[1;32;48m os\033[1;37;0m      $(sed -n 's/^PRETTY_NAME="//p' /etc/os-release | cut -f1 -d'"')
-   \033[1;34;48m漣kernel\033[1;37;0m  $(uname -r)
-   \033[1;36;48m de/wm\033[1;37;0m   $XDG_CURRENT_DESKTOP
-   \033[1;35;48m⏻ uptime\033[1;37;0m  $(uptime -p | sed "s/up //")
-   \033[1;31;48m shell\033[1;37;0m   $SHELL
-   \033[1;33;48m colors\033[1;37;0m  \033[1;31;48m$unicode\033[1;37;0m \033[1;33;48m$unicode\033[1;37;0m \033[1;32;48m$unicode\033[1;37;0m \033[1;36;48m$unicode\033[1;37;0m \033[1;34;48m$unicode\033[1;37;0m \033[1;35;48m$unicode\033[1;37;0m $unicode
+
+echo " ┌────────────┐
+ │  \033[1;31;48m\033[1;37;0m user    │ \033[1;31;48m$(whoami)\033[1;37;0m 
+ │  \033[1;33;48m\033[1;37;0m hname   │ \033[1;33;48m$(hostname)\033[1;37;0m 
+ │  \033[1;32;48m\033[1;37;0m distro  │ \033[1;32;48m$(sed -n 's/^PRETTY_NAME="//p' /etc/os-release | cut -f1 -d'"')\033[1;37;0m 
+ │  \033[1;36;48m漣\033[1;37;0mkernel  │ \033[1;36;48m$(uname -r)\033[1;37;0m 
+ │  \033[1;34;48m\033[1;37;0m de/wm   │ \033[1;34;48m$XDG_CURRENT_DESKTOP\033[1;37;0m 
+ │  \033[1;35;48m⏻\033[1;37;0m uptime  │ \033[1;35;48m$(uptime -p | sed "s/up //")\033[1;37;0m 
+ │  \033[1;31;48m\033[1;37;0m shell   │ \033[1;31;48m$SHELL\033[1;37;0m
+ ├────────────┤   
+ │  \033[1;33;48m\033[1;37;0m colors  │ \033[1;31;48m$unicode\033[1;37;0m \033[1;33;48m$unicode\033[1;37;0m \033[1;32;48m$unicode\033[1;37;0m \033[1;36;48m$unicode\033[1;37;0m \033[1;34;48m$unicode\033[1;37;0m \033[1;35;48m$unicode\033[1;37;0m $unicode 
+ └────────────┘  
 "
