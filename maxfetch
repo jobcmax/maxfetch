@@ -1,15 +1,27 @@
 #!/bin/sh
-unicode="" # edit this to whatever you like
-echo " ┌────────────┐
- │  \033[1;31;48m\033[1;37;0m user    │ \033[1;31;48m$(whoami)\033[1;37;0m 
- │  \033[1;33;48m\033[1;37;0m hname   │ \033[1;33;48m$(hostname)\033[1;37;0m 
- │  \033[1;32;48m\033[1;37;0m distro  │ \033[1;32;48m$(sed -n 's/^PRETTY_NAME="//p' /etc/os-release | cut -f1 -d'"')\033[1;37;0m 
- │  \033[1;36;48m漣\033[1;37;0mkernel  │ \033[1;36;48m$(uname -r)\033[1;37;0m 
- │  \033[1;34;48m\033[1;37;0m de/wm   │ \033[1;34;48m$XDG_CURRENT_DESKTOP\033[1;37;0m 
- │  \033[1;35;48m⏻\033[1;37;0m uptime  │ \033[1;35;48m$(uptime -p | sed "s/up //")\033[1;37;0m 
- │  \033[1;31;48m\033[1;37;0m shell   │ \033[1;31;48m$(echo ${SHELL##*/})\033[1;37;0m
- │  \033[1;33;48m\033[1;37;0m term    │ \033[1;33;48m$(ps -o comm= -p "$(($(ps -o ppid= -p "$(($(ps -o sid= -p "$$")))")))")\033[1;37;0m 
- ├────────────┤   
- │  \033[1;33;48m\033[1;37;0m colors  │ \033[1;31;48m$unicode\033[1;37;0m \033[1;33;48m$unicode\033[1;37;0m \033[1;32;48m$unicode\033[1;37;0m \033[1;36;48m$unicode\033[1;37;0m \033[1;34;48m$unicode\033[1;37;0m \033[1;35;48m$unicode\033[1;37;0m $unicode 
- └────────────┘  
-"
+unicode="▅▅▅" 
+
+black=$(tput setaf 0)
+red=$(tput setaf 1)
+green=$(tput setaf 2)
+yellow=$(tput setaf 3)
+blue=$(tput setaf 4)
+magenta=$(tput setaf 5)
+cyan=$(tput setaf 6)
+white=$(tput setaf 7)
+bright=$(tput bold)
+normal=$(tput sgr0)
+underline=$(tput smul)
+
+echo "┌────────────┐ "
+echo "│  ${red}${normal} user    │ ${red}$(whoami)${normal}"
+echo "│  ${yellow}${normal} hname   │ ${yellow}$(hostname)${normal} "
+echo "│  ${green}${normal} distro  │ ${green}$(sed -n 's/^PRETTY_NAME="//p' /etc/os-release | cut -f1 -d'"')${normal} "
+echo "│  ${cyan}漣${normal}kernel  │ ${cyan}$(uname -r)${normal} "
+echo "│  ${blue}${normal} de/wm   │ ${blue}$XDG_CURRENT_DESKTOP${normal} "
+echo "│  ${magenta}⏻${normal} uptime  │ ${magenta}$(uptime -p | sed "s/up //")${normal} "
+echo "│  ${red}${normal} shell   │ ${red}$(echo ${SHELL##*/})${normal} "
+echo "│  ${yellow}${normal} term    │ ${yellow}$(ps -o comm= -p "$(($(ps -o ppid= -p "$(($(ps -o sid= -p "$$")))")))")${normal} "
+echo "├────────────┤ "
+echo "│  ${yellow} colors${normal}  │ ${red}$unicode${normal}${yellow}$unicode${normal}${green}$unicode${normal}${cyan}$unicode${normal}${blue}$unicode${normal}${magenta}$unicode${normal}"
+echo "└────────────┘ "
