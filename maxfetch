@@ -23,5 +23,5 @@ echo "│  ${magenta}⏻${normal} uptime  │ ${magenta}$(uptime -p | sed "s/up 
 echo "│  ${red}${normal} shell   │ ${red}$(echo ${SHELL##*/})${normal} "
 echo "│  ${yellow}${normal} term    │ ${yellow}$(ps -o comm= -p "$(($(ps -o ppid= -p "$(($(ps -o sid= -p "$$")))")))")${normal} "
 echo "├────────────┤ "
-echo "│  ${yellow} colors${normal}  │ ${red}$unicode${normal}${yellow}$unicode${normal}${green}$unicode${normal}${cyan}$unicode${normal}${blue}$unicode${normal}${magenta}$unicode${normal}"
+echo "│  ${yellow} ${normal}colors  │ ${red}$unicode${normal}${yellow}$unicode${normal}${green}$unicode${normal}${cyan}$unicode${normal}${blue}$unicode${normal}${magenta}$unicode${normal}"
 echo "└────────────┘ "
