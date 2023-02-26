@@ -1,8 +1,10 @@
-# maxfetch
+# Maxfetch
 a fetching program, written in shell, preview:
 
  ![](https://raw.githubusercontent.com/jobcmax/maxfetch/main/preview.png)
-## installation
+ # Dependencies
+ - a ![Nerd Font](https://github.com/ryanoasis/nerd-fonts), thats it
+## Installation
 ```
 wget -qO - https://raw.githubusercontent.com/jobcmax/maxfetch/main/install.sh | sh
 ```
