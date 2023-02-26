@@ -1,0 +1,28 @@
+#!/data/data/com.termux/files/usr/bin/sh
+unicode="▅▅▅" 
+
+black=$(tput setaf 0)
+red=$(tput setaf 1)
+green=$(tput setaf 2)
+yellow=$(tput setaf 3)
+blue=$(tput setaf 4)
+magenta=$(tput setaf 5)
+cyan=$(tput setaf 6)
+white=$(tput setaf 7)
+bright=$(tput bold)
+normal=$(tput sgr0)
+underline=$(tput smul)
+
+echo "┌────────────┐ "
+echo "│  ${red}${normal} user    │ ${red}$(whoami)${normal}"
+echo "│  ${yellow}${normal} hname   │ ${yellow}$(hostname)${normal} "
+echo "│  ${green}${normal} distro  │ ${green}$(uname -o)${normal} "
+echo "│  ${cyan}漣${normal}kernel  │ ${cyan}$(uname -r)${normal} "
+echo "│  ${blue}${normal} de/wm   │ ${blue}Termux${normal} "
+echo "│  ${magenta}⏻${normal} uptime  │ ${magenta}$(uptime -p | sed "s/up //")${normal} "
+echo "│  ${red}${normal} shell   │ ${red}$(echo ${SHELL##*/})${normal} "
+echo "│  ${yellow}${normal} term    │ ${yellow}Termux${normal} "
+echo "├────────────┤ "
+echo "│  ${yellow} ${normal}colors  │ ${red}$unicode${normal}${yellow}$unicode${normal}${green}$unicode${normal}${cyan}$unicode${normal}${blue}$unicode${normal}${magenta}$unicode${normal}"
+echo "└────────────┘ "
+

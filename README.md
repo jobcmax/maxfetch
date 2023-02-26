@@ -6,3 +6,7 @@ a fetching program, written in shell, preview:
 ```
 wget -qO - https://raw.githubusercontent.com/jobcmax/maxfetch/main/install.sh | sh
 ```
+Termux:
+```
+wget -qO - https://raw.githubusercontent.com/jobcmax/maxfetch/main/install.termux.sh | sh
+```
