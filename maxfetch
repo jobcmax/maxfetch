@@ -15,7 +15,7 @@ underline=$(tput smul)
 
 echo "┌────────────┐ "
 echo "│  ${red}${normal} user    │ ${red}$(whoami)${normal}"
-echo "│  ${yellow}${normal} hname   │ ${yellow}$(cat /etc/hostname)${normal} "
+echo "│  ${yellow}${normal} hname   │ ${yellow}$(hostname)${normal} "
 echo "│  ${green}${normal} distro  │ ${green}$(sed -n 's/^PRETTY_NAME="//p' /etc/os-release | cut -f1 -d'"')${normal} "
 echo "│  ${cyan}漣${normal}kernel  │ ${cyan}$(uname -r)${normal} "
 echo "│  ${blue}${normal} de/wm   │ ${blue}$XDG_CURRENT_DESKTOP${normal} "
