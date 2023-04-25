@@ -1,5 +1,6 @@
 #!/bin/sh
 unicode="▅▅▅" 
+version="1.0.0"
 
 black=$(tput setaf 0)
 red=$(tput setaf 1)
@@ -13,15 +14,26 @@ bright=$(tput bold)
 normal=$(tput sgr0)
 underline=$(tput smul)
 
-echo "┌────────────┐ "
-echo "│  ${red}${normal} user    │ ${red}$(whoami)${normal}"
-echo "│  ${yellow}${normal} hname   │ ${yellow}$(cat /etc/hostname)${normal} "
-echo "│  ${green}${normal} distro  │ ${green}$(sed -n 's/^PRETTY_NAME="//p' /etc/os-release | cut -f1 -d'"')${normal} "
-echo "│  ${cyan}漣${normal}kernel  │ ${cyan}$(uname -r)${normal} "
-echo "│  ${blue}${normal} de/wm   │ ${blue}$XDG_CURRENT_DESKTOP${normal} "
-echo "│  ${magenta}⏻${normal} uptime  │ ${magenta}$(uptime -p | sed "s/up //")${normal} "
-echo "│  ${red}${normal} shell   │ ${red}$(echo ${SHELL##*/})${normal} "
-echo "│  ${yellow}${normal} term    │ ${yellow}$(ps -o comm= -p "$(($(ps -o ppid= -p "$(($(ps -o sid= -p "$$")))")))")${normal} "
-echo "├────────────┤ "
-echo "│  ${yellow} ${normal}colors  │ ${red}$unicode${normal}${yellow}$unicode${normal}${green}$unicode${normal}${cyan}$unicode${normal}${blue}$unicode${normal}${magenta}$unicode${normal}"
-echo "└────────────┘ "
+fetch() {
+    echo "┌────────────┐ "
+    echo "│  ${red}${normal} user    │ ${red}$(whoami)${normal}"
+    echo "│  ${yellow}${normal} hname   │ ${yellow}$(cat /etc/hostname)${normal} "
+    echo "│  ${green}${normal} distro  │ ${green}$(sed -n 's/^PRETTY_NAME="//p' /etc/os-release | cut -f1 -d'"')${normal} "
+    echo "│  ${cyan}漣${normal}kernel  │ ${cyan}$(uname -r)${normal} "
+    echo "│  ${blue}${normal} de/wm   │ ${blue}$XDG_CURRENT_DESKTOP${normal} "
+    echo "│  ${magenta}⏻${normal} uptime  │ ${magenta}$(uptime -p | sed "s/up //")${normal} "
+    echo "│  ${red}${normal} shell   │ ${red}$(echo ${SHELL##*/})${normal} "
+    echo "│  ${yellow}${normal} term    │ ${yellow}$(ps -o comm= -p "$(($(ps -o ppid= -p "$(($(ps -o sid= -p "$$")))")))")${normal} "
+    echo "├────────────┤ "
+    echo "│  ${yellow} ${normal}colors  │ ${red}$unicode${normal}${yellow}$unicode${normal}${green}$unicode${normal}${cyan}$unicode${normal}${blue}$unicode${normal}${magenta}$unicode${normal}"
+    echo "└────────────┘ "
+}
+
+
+case "$1" in
+   "--version") echo "Maxfetch $version" 
+   ;;
+   "--help") echo "Usage: --help      prints this message \n       --version   prints maxfetch version" 
+   ;;
+   *) fetch 
+esac
