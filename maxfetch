@@ -2,23 +2,34 @@
 unicode="▅▅▅" 
 version="1.0.0"
 
-black=$(tput setaf 0)
+_black=$(tput setaf 0)
 red=$(tput setaf 1)
 green=$(tput setaf 2)
 yellow=$(tput setaf 3)
 blue=$(tput setaf 4)
 magenta=$(tput setaf 5)
 cyan=$(tput setaf 6)
-white=$(tput setaf 7)
-bright=$(tput bold)
+_white=$(tput setaf 7)
+_bright=$(tput bold)
 normal=$(tput sgr0)
-underline=$(tput smul)
+_underline=$(tput smul)
+
+help() {
+printf "Usage:
+    -v, --version
+      prints maxfetch version
+    -u, --update
+      updates maxfetch
+    -h, --help
+      prints this message
+"
+}
 
 fetch() {
     echo "┌────────────┐ "
     echo "│  ${red}${normal} user    │ ${red}$(whoami)${normal}"
     echo "│  ${yellow}${normal} hname   │ ${yellow}$(cat /etc/hostname)${normal} "
-    echo "│  ${green}${normal} distro  │ ${green}$(sed -n 's/^PRETTY_NAME="//p' /etc/os-release | cut -f1 -d'"')${normal} "
+    echo "│  ${green}${normal} distro  │ ${green}$(sed -nE "s@PRETTY_NAME=\"([^\"]*)\"@\1@p" /etc/os-release)${normal} "
     echo "│  ${cyan}漣${normal}kernel  │ ${cyan}$(uname -r)${normal} "
     echo "│  ${blue}${normal} de/wm   │ ${blue}$XDG_CURRENT_DESKTOP${normal} "
     echo "│  ${magenta}⏻${normal} uptime  │ ${magenta}$(uptime -p | sed "s/up //")${normal} "
@@ -29,11 +40,28 @@ fetch() {
     echo "└────────────┘ "
 }
 
+update() {
+	update=$(curl -s "https://raw.githubusercontent.com/jobcmax/maxfetch/main/maxfetch" || die "Connection error")
+	update="$(printf '%s\n' "$update" | diff -u "$(which maxfetch)" -)"
+	if [ -z "$update" ]; then
+		printf "Script is up to date :)\n"
+	else
+		if printf '%s\n' "$update" | patch "$(which maxfetch)" -; then
+			printf "Script has been updated\n"
+		else
+			printf "Can't update for some reason!\n"
+		fi
+	fi
+	exit 0
+}
 
-case "$1" in
-   "--version") echo "Maxfetch $version" 
-   ;;
-   "--help") echo "Usage: --help      prints this message \n       --version   prints maxfetch version" 
-   ;;
-   *) fetch 
-esac
+while [ $# -gt 0 ]; do
+	case "$1" in
+	-v | --version) printf "Maxfetch %s\n" "$version" && exit 0 ;;
+  -u | --update) update ;;
+  -h | --help) help && exit 0 ;;
+  *) fetch && exit 0 ;;
+	esac
+done
+
+fetch && exit 0
