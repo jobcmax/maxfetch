@@ -1,6 +1,6 @@
 #!/bin/sh
 unicode="▅▅▅" 
-version="1.0.0"
+version="1.2.0"
 
 _black=$(tput setaf 0)
 red=$(tput setaf 1)
@@ -25,6 +25,12 @@ printf "Usage:
 "
 }
 
+up=$(uptime | sed -E 's/^[^,]*up *//; s/mins/minutes/; s/hrs?/hours/;
+  s/([[:digit:]]+):0?([[:digit:]]+)/\1 hours, \2 minutes/;
+  s/^1 hours/1 hour/; s/ 1 hours/ 1 hour/;
+  s/min,/minutes,/; s/ 0 minutes,/ less than a minute,/; s/ 1 minutes/ 1 minute/;
+  s/  / /; s/, *[[:digit:]]* users?.*//')
+
 fetch() {
     echo "┌────────────┐ "
     echo "│  ${red}${normal} user    │ ${red}$(whoami)${normal}"
@@ -32,7 +38,7 @@ fetch() {
     echo "│  ${green}${normal} distro  │ ${green}$(sed -nE "s@PRETTY_NAME=\"([^\"]*)\"@\1@p" /etc/os-release)${normal} "
     echo "│  ${cyan}漣${normal}kernel  │ ${cyan}$(uname -r)${normal} "
     echo "│  ${blue}${normal} de/wm   │ ${blue}$XDG_CURRENT_DESKTOP${normal} "
-    echo "│  ${magenta}⏻${normal} uptime  │ ${magenta}$(uptime -p | sed "s/up //")${normal} "
+    echo "│  ${magenta}⏻${normal} uptime  │ ${magenta}${up}${normal} "
     echo "│  ${red}${normal} shell   │ ${red}$(echo ${SHELL##*/})${normal} "
     echo "│  ${yellow}${normal} term    │ ${yellow}$(ps -o comm= -p "$(($(ps -o ppid= -p "$(($(ps -o sid= -p "$$")))")))")${normal} "
     echo "├────────────┤ "
