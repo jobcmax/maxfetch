@@ -12,3 +12,13 @@ Termux:
 ```
 wget -qO - https://raw.githubusercontent.com/jobcmax/maxfetch/main/install.termux.sh | sh
 ```
+
+Arch or Arch based:
+```
+yay -S maxfetch
+```
+
+NemesisOS:
+```
+nemesis-pkg install maxfetch
+```
