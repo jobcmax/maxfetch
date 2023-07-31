@@ -7,20 +7,27 @@
 
     outputs = { self, nixpkgs }: 
     let
-        system = "x86_64-linux";
-        pkgs = nixpkgs.legacyPackages.${system};
-        inherit (pkgs) stdenv;
+        forAllSystems = function:
+            nixpkgs.lib.genAttrs [
+            "x86_64-linux"
+            "aarch64-linux"
+            "x86_64-darwin"
+            ] (system:
+                function (import nixpkgs {
+                inherit system;
+            }));
     in
     {
-        packages."x86_64-linux".default = stdenv.mkDerivation {
+        packages = forAllSystems (pkgs: {
+            default = 
+            pkgs.stdenv.mkDerivation {
             name = "maxfetch";
-            system = "x86_64-linux";
             src = ./.;
             buildPhase = ''
                 mkdir -p $out/bin
                 chmod +x maxfetch
                 cp maxfetch $out/bin
             '';
-        };
+        };});
     };
 }
