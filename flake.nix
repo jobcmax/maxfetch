@@ -10,7 +10,6 @@
         forAllSystems = function:
             nixpkgs.lib.genAttrs [
             "x86_64-linux"
-            "aarch64-linux"
             "x86_64-darwin"
             ] (system:
                 function (import nixpkgs {
@@ -19,15 +18,24 @@
     in
     {
         packages = forAllSystems (pkgs: {
-            default = 
-            pkgs.stdenv.mkDerivation {
-            name = "maxfetch";
-            src = ./.;
-            buildPhase = ''
-                mkdir -p $out/bin
-                chmod +x maxfetch
-                cp maxfetch $out/bin
-            '';
-        };});
+            default = pkgs.stdenv.mkDerivation {
+                name = "maxfetch";
+                src = ./.;
+                buildPhase = ''
+                    mkdir -p $out/bin
+                    chmod +x maxfetch
+                    cp maxfetch $out/bin
+                '';
+            };
+            termux = pkgs.stdenv.mkDerivation {
+                name = "maxfetch";
+                src = ./.;
+                buildPhase = ''
+                    mkdir -p $out/bin
+                    chmod +x maxfetch.termux
+                    cp maxfetch.termux $out/bin/maxfetch
+                '';
+            };
+        });
     };
 }
