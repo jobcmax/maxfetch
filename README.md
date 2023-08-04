@@ -6,11 +6,11 @@ a fetching program, written in shell, preview:
  - a ![Nerd Font](https://github.com/ryanoasis/nerd-fonts), thats it
 ## Installation
 ```
-wget -qO - https://raw.githubusercontent.com/jobcmax/maxfetch/main/install.sh | sh
+wget -qO - https://raw.githubusercontent.com/jobcmax/maxfetch/main/install.sh | bash
 ```
 Termux:
 ```
-wget -qO - https://raw.githubusercontent.com/jobcmax/maxfetch/main/install.termux.sh | sh
+wget -qO - https://raw.githubusercontent.com/jobcmax/maxfetch/main/install.termux.sh | bash
 ```
 
 Arch or Arch based:
