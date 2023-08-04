@@ -1,5 +1,3 @@
-#!/bin/bash
-
 if [ -e /usr/bin/makepkg ]; then
 	printf "using AUR package\n"
 	pushd $(mktemp -d)
